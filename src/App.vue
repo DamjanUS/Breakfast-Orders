@@ -4,7 +4,9 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav>
-    <router-view/>
+    <div class="mypagehere">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -28,5 +30,11 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 </style>
