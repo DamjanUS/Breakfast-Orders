@@ -2,6 +2,8 @@
 
 ## Project setup
 ```
+git clone https://github.com/DamjanUS/breakfast-orders
+cd breakfast-orders
 npm install
 ```
 
