@@ -1,39 +1,36 @@
 <template>
   <div class="poster">
-    <img :src="link">
+    <img :src="poster.img">
     <br>
     <br>
-    <span>caption: {{ caption }}</span>
+    <span>caption: {{ poster.caption }}</span>
     <br>
-    <Pbutton @click="order()">
-      <span style='color: blue'>Order</span>
-    </Pbutton>
-    <Pbutton @click="orderpls()">
-      <span style='color: red'>Order pls</span>
-    </Pbutton>
+    <counter v-if="poster.available"></counter>
+    <div v-else>Sorry not available</div>
   </div>
 </template>
 
 <script>
-import Pbutton from '@/components/PButton'
+import Counter from '@/components/Counter.vue'
 
 export default {
+  props: {
+    poster: Object
+  },
   data() {
     return {
-      link: "https://images.pexels.com/photos/11961823/pexels-photo-11961823.jpeg?auto=compress&cs=tinysrgb&w=400&lazy=load",
-      caption: "Ubav dorucek"
     }
   },
   methods: {
     order() {
-      console.warn("please order", this.caption)
+      console.warn("please order", this.poster.caption)
     },
     orderpls() {
       this.order()
     }
   },
-  components:{
-    Pbutton
+  components: {
+    Counter
   }
 }
 </script>

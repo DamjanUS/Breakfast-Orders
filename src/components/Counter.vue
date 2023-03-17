@@ -16,14 +16,14 @@ import Pbutton from '@/components/PButton'
 export default {
   data() {
     return {
-      counter : 0
+      counter: 0
     }
   },
-  components:{
+  components: {
     Pbutton
   },
-  methods:{
-    increment(howMuch){
+  methods: {
+    increment(howMuch) {
       this.counter = this.counter + howMuch
     }
   }
