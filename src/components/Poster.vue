@@ -1,12 +1,9 @@
 <template>
   <div class="poster">
     <img :src="poster.img">
-    <br>
-    <br>
-    <span>caption: {{ poster.caption }}</span>
-    <br>
+    <span class="text-lg">caption: {{ poster.caption }}</span>
     <counter v-if="poster.available"></counter>
-    <div v-else>Sorry not available</div>
+    <div v-else class="italic text-stone-500">Sorry not sorry</div>
   </div>
 </template>
 
@@ -35,13 +32,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="postcss" scoped>
 .poster {
-  padding: 15px;
-  margin: 10px;
-}
-
-div {
-  background-color: #bebebe;
+  @apply bg-red-300 border border-stone-300 rounded-xl p-2 flex flex-col gap-3;
 }
 </style>

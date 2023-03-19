@@ -5,7 +5,7 @@
     </ModelTest>
     <Counter></Counter>
 
-    <div class="container">
+    <div class="pcontainer gap-3">
       <poster
         v-for="poster in posters" :key="poster.id"
         :poster="poster"

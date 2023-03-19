@@ -32,7 +32,7 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
-.container {
+.pcontainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
