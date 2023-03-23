@@ -4,13 +4,13 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav>
-    <div class="mypagehere">
+    <div class="layout">
       <router-view/>
     </div>
   </div>
 </template>
 
-<style>
+<style lang="postcss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -32,9 +32,17 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
+.layout {
+  @apply px-4;
+}
+
 .pcontainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* table, th, td {
+  border: 1px solid black;
+} */
 </style>

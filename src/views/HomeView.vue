@@ -1,24 +1,19 @@
 <template>
   <div class="home">
-    <ModelTest>
-      <span>Message is</span>
-    </ModelTest>
-    <Counter></Counter>
-
-    <div class="pcontainer gap-3">
-      <poster
-        v-for="poster in posters" :key="poster.id"
-        :poster="poster"
-      >
-      </poster>
+    <div class="flex gap-3">
+      <galery :posters="posters" @order="onOrder($event)"></galery>
+      <div class="w-1/4">
+        <checkout :orders="orders"></checkout>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Poster from '@/components/Poster.vue'
 import Counter from '@/components/Counter.vue'
 import ModelTest from '@/components/ModelTest.vue'
+import Checkout from '@/components/Checkout.vue'
+import Galery from '@/components/Gallery.vue'
 
 export default {
   name: 'HomeView',
@@ -43,13 +38,33 @@ export default {
           caption: "lepotica3",
           available: true
         }
+      ],
+      orders: [
+        {
+          id: 1,
+          count: 0
+        },
+        {
+          id: 2,
+          count: 0
+        },
+        {
+          id: 3,
+          count: 0
+        }
       ]
     }
   },
+  methods: {
+    onOrder(order) {
+      console.warn("hi from homeView agency with id", order.posterId)
+    }
+  },
   components: {
-    Poster,
     Counter,
-    ModelTest    
+    ModelTest,
+    Checkout,
+    Galery    
   }
 }
 </script>

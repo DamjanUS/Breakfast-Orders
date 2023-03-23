@@ -1,9 +1,12 @@
 <template>
   <div class="poster">
-    <img :src="poster.img">
+    <img :src="poster.img"/>
     <span class="text-lg">caption: {{ poster.caption }}</span>
-    <counter v-if="poster.available"></counter>
+
+    <counter v-if="poster.available" @order="onOrder($event)"></counter>
     <div v-else class="italic text-stone-500">Sorry not sorry</div>
+
+    <div v-if="poster.available && counter > 0">Today you have {{ counter }} orders</div> 
   </div>
 </template>
 
@@ -16,14 +19,13 @@ export default {
   },
   data() {
     return {
+      counter: 0
     }
   },
   methods: {
-    order() {
-      console.warn("please order", this.poster.caption)
-    },
-    orderpls() {
-      this.order()
+    onOrder(count) {
+      this.counter = this.counter + count
+      this.$emit('order', count)
     }
   },
   components: {
