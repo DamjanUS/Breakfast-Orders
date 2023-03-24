@@ -1,5 +1,5 @@
 <template>
-  <div class="poster">
+  <div class="poster" :class="{ 'not-available': !poster.available }">
     <img :src="poster.img"/>
     <span class="text-lg">caption: {{ poster.caption }}</span>
 
@@ -37,5 +37,8 @@ export default {
 <style lang="postcss" scoped>
 .poster {
   @apply bg-red-300 border border-stone-300 rounded-xl p-2 flex flex-col gap-3;
+}
+.poster.not-available {
+  @apply opacity-60;
 }
 </style>
