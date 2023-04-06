@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     onOrder(count, posterId) {
-      let order = {
+      const order = {
         posterId: posterId,
         count: count
       }
