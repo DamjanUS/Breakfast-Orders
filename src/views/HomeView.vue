@@ -8,9 +8,9 @@
           :options="allCountries"
           :reduce="opt => opt.id"
           multiple
-          placeholder="Filter by country"
-        >
+          placeholder="Filter by country">
         </v-select>
+        <checkbox label="Available only" v-model="isAvaliable"> </checkbox>
         <div class="py-2"></div>
         <checkout :orders="checkoutSummmary" @clear="clearOrders()"></checkout>
       </div>
@@ -25,25 +25,27 @@ import Counter from '@/components/Counter.vue'
 import ModelTest from '@/components/ModelTest.vue'
 import Checkout from '@/components/Checkout.vue'
 import Gallery from '@/components/Gallery.vue'
+import Checkbox from '@/components/Checkbox.vue'
 
 export default {
   data() {
     return {
       selectedCountries: [],
+      isAvaliable: false,
       posters: [
         {
           id: 1,
-          img: "https://images.pexels.com/photos/16085452/pexels-photo-16085452.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-          caption: "lepotica1",
+          img: "https://images.pexels.com/photos/7324757/pexels-photo-7324757.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          caption: "lepotici1",
           country: 'us',
           available: true
         },
         {
           id: 2,
-          img: "https://images.pexels.com/photos/6307706/pexels-photo-6307706.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+          img: "https://images.pexels.com/photos/1152994/pexels-photo-1152994.jpeg",
           caption: "lepotica2",
           country: 'cb',
-          available: true
+          available: false
         },
         {
           id: 3,
@@ -71,12 +73,13 @@ export default {
   },
   computed: {
     filteredPosters() {
-      const isFilterActive = this.selectedCountries.length > 0
-      if (!isFilterActive) return this.posters
+      const isFilterActive = (this.selectedCountries.length > 0) || (this.isAvaliable === true)
+      if (!isFilterActive)  return this.posters
 
       const filtered = this.posters.filter((poster) => {
-        const isIncluded = this.selectedCountries.includes(poster.country)
-        return isIncluded
+        const isCountryIncluded = this.selectedCountries.length === 0 || this.selectedCountries.includes(poster.country)
+        const availability = this.isAvaliable === false || poster.available === this.isAvaliable
+        return isCountryIncluded && availability
       })
       return filtered
     },
@@ -130,7 +133,8 @@ export default {
     Counter,
     ModelTest,
     Checkout,
-    Gallery    
+    Gallery,
+    Checkbox    
   }
 }
 </script>
