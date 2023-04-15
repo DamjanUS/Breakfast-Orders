@@ -1,5 +1,8 @@
 <template>
   <div class="border rounded">
+    <div class="m-2 flex justify-end">
+      <PButton @click="clear()" :disabled="orders.length === 0">Clear</PButton>
+    </div>
     <table class="w-full">
       <tr>
         <th>Caption</th>
@@ -17,9 +20,19 @@
 </template>
 
 <script>
+import PButton from '@/components/PButton.vue'
+
 export default {
   props: {
     orders: Array
+  },
+  methods: {
+    clear() {
+      this.$emit('clear')
+    }
+  },
+  components: {
+    PButton
   }
 }
 </script>

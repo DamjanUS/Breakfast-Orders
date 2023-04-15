@@ -5,8 +5,8 @@
 
     <counter v-if="poster.available" @order="onOrder($event)"></counter>
     <div v-else class="italic text-stone-500">Sorry not sorry</div>
-
-    <div v-if="poster.available && counter > 0">Today you have {{ counter }} orders</div> 
+  
+    <div v-if="poster.available && counter > 0">Today you have {{ counter }} orders</div>
   </div>
 </template>
 

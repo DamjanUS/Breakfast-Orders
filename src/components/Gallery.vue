@@ -5,6 +5,9 @@
       :poster="poster" @order="onOrder($event, poster.id)"
     >
     </poster>
+    <div v-if="posters.length === 0">
+      No lepotici are available at the moment!
+    </div>
   </div>
 </template>
 
