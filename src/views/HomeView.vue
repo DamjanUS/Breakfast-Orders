@@ -3,19 +3,39 @@
     <div class="flex gap-3">
       <gallery :posters="filteredPosters" @order="onOrder($event)"></gallery>
       <div class="w-1/4">
-        <v-select
-          v-model="selectedCountries"
-          :options="allCountries"
-          :reduce="opt => opt.id"
-          multiple
-          placeholder="Filter by country">
-        </v-select>
-        <checkbox label="Available only" v-model="isAvaliable"> </checkbox>
+        <div class="flex items-center gap-4">
+          <PButton @click="show()">Forma</PButton>
+          <div class="flex-1">
+            <v-select
+              v-model="selectedCountries"
+              :options="allCountries"
+              :reduce="opt => opt.id"
+              multiple
+              placeholder="Filter by country">
+            </v-select>
+          </div>
+          <checkbox label="Available only" v-model="isAvaliable"></checkbox>
+        </div>
         <div class="py-2"></div>
         <checkout :orders="checkoutSummmary" @clear="clearOrders()"></checkout>
       </div>
     </div>
+
+    <modal name="Form-modal">
+      <h1>Create new poster</h1><br>
+      <form @submit.prevent="pushForm">
+        <label for="link" >Image link:</label><br>
+        <input type="text" id="link" name="link" class="border" v-model="newPoster.img"><br>
+        <label for="name" >Caption:</label><br>
+        <input type="text" id="name" name="name" class="border" v-model="newPoster.caption"><br>
+        <label for="lname">Country:</label><br>
+        <input type="text" id="lname" name="lname" class="border" v-model="newPoster.country"><br>
+        <checkbox label="Available:" v-model="newPoster.available"></checkbox><br>
+        <PButton type="submit">Submit</PButton>
+      </form>
+    </modal>
   </div>
+
 </template>
 
 <script>
@@ -26,6 +46,7 @@ import ModelTest from '@/components/ModelTest.vue'
 import Checkout from '@/components/Checkout.vue'
 import Gallery from '@/components/Gallery.vue'
 import Checkbox from '@/components/Checkbox.vue'
+import PButton from '@/components/PButton.vue'
 
 export default {
   data() {
@@ -55,6 +76,12 @@ export default {
           available: true
         }
       ],
+      newPoster: {
+        img: '',
+        caption: '',
+        country: '',
+        available: false
+      },
       orders: [
         {
           id: 1,
@@ -73,9 +100,6 @@ export default {
   },
   computed: {
     filteredPosters() {
-      const isFilterActive = (this.selectedCountries.length > 0) || (this.isAvaliable === true)
-      if (!isFilterActive)  return this.posters
-
       const filtered = this.posters.filter((poster) => {
         const isCountryIncluded = this.selectedCountries.length === 0 || this.selectedCountries.includes(poster.country)
         const availability = this.isAvaliable === false || poster.available === this.isAvaliable
@@ -127,14 +151,29 @@ export default {
           count: 0
         }
       ]
-    }
+    },
+    show() {
+      this.$modal.show('Form-modal')
+    },
+    pushForm() {
+      const newId = this.posters.length + 1
+      this.newPoster.id = newId
+      this.posters.push(this.newPoster)
+     
+      this.orders.push({
+        id: newId,
+        count: 0
+      })
+      this.$modal.hide('Form-modal')
+    },  
   },
   components: {
     Counter,
     ModelTest,
     Checkout,
     Gallery,
-    Checkbox    
+    Checkbox,
+    PButton    
   }
 }
 </script>
