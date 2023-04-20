@@ -23,7 +23,7 @@
 
     <modal name="Form-modal">
       <h1>Create new poster</h1><br>
-      <form @submit.prevent="pushForm">
+      <form @submit.prevent="pushForm" class="py-2">
         <label for="link" >Image link:</label><br>
         <input type="text" id="link" name="link" class="border" v-model="newPoster.img"><br>
         <label for="name" >Caption:</label><br>
